@@ -35,10 +35,6 @@ class Command(BaseCommand):
         make_option(
             '-n', '--native-django-dump', action='store_true', default=None,
             dest='nativedump', help='use django build in database dump method'),
-        make_option(
-            '-s', '--django-dump-options', default=None,
-            dest='nativedump_options',
-            help='options to pase to django dumpdata method'),
     )
 
     help = "Back up a Django installation (database and media directory)."
@@ -46,7 +42,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         extras = options.get('extras')
         nativedump = options.get('nativedump')
-        nativedump_options = options.get('nativedump_options')
         output_file = options.get('output')
         output_dir = options.get('outdir')
         glacier_vault = options.get('glacier')
@@ -76,8 +71,7 @@ class Command(BaseCommand):
 
         # Back up databases
         if nativedump:
-            db.django_native_dump(
-                settings, database_root, **nativedump_options)
+            db.django_native_dump(settings, database_root)
         else:
             db.backup_to(settings, database_root)
 
