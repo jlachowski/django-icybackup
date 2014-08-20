@@ -76,7 +76,8 @@ class Command(BaseCommand):
 
         # Back up databases
         if nativedump:
-            db.django_native_dump(db.BACKUP, database_root, nativedump_options)
+            db.django_native_dump(
+                settings, database_root, **nativedump_options)
         else:
             db.backup_to(settings, database_root)
 

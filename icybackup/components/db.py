@@ -4,6 +4,7 @@ from tempfile import mkstemp
 from subprocess import check_call
 from shutil import copy
 from django.conf import settings
+from django.core import management
 
 BACKUP = 1
 RESTORE = 2
@@ -59,16 +60,28 @@ def do(action, database, f, **kwargs):
                 'Backup' if action == BACKUP else 'Restore', engine))
 
 
-def django_native_dump(action, dir, options):
-    f = os.path.join(dir, 'default')
+def django_native_dump(settings, dir, **kwargs):
+    for name, database in _database_dict_from_settings(settings).iteritems():
+        _django(BACKUP, dir, name, **kwargs)
+
+
+def django_native_restore(settings, dir, **kwargs):
+    for name, database in _database_dict_from_settings(settings).iteritems():
+        _django(RESTORE, dir, name, **kwargs)
+
+
+def _django(action, dir, name='default', **kwargs):
+    f = os.path.join(dir, name + '_dump.json')
     if action == BACKUP:
-        command = 'python manage.py dumpdata --natural --format json --indent 2'
         with open(f, 'w') as fo:
-            check_call(command, stdout=fo)
+            management.call_command(
+                'dumpdata', use_natural_keys=True, indent=2, format='json',
+                using=name, stdout=fo,
+                exclude=['contenttypes', 'auth.Permission', 'sessions.Session'],
+                **kwargs)
     elif action == RESTORE:
-        command = 'python manage.py loaddata'
-        with open(f, 'r') as fo:
-            check_call(command, stdin=fo)
+        # with open(f, 'r') as fo:
+        management.call_command('loaddata', f)
 
 
 def __sqlite(action, database, f):
