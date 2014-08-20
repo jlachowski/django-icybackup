@@ -16,7 +16,7 @@ A fork of (a fork of) django-backup which adds:
 
 ## Installation
 
-Run `pip install django-icybackup`, then add `icybackup` to your `INSTALLED_APPS`.
+Run `pip install django-icybackup-jl`, then add `icybackup` to your `INSTALLED_APPS`.
 
 ## Usage
 
@@ -29,7 +29,9 @@ Run `pip install django-icybackup`, then add `icybackup` to your `INSTALLED_APPS
 
 Supports the following optional flags:
 
-- `-e extra_file` - Add an extra file or directory to the backup (can be specified multiple times)
+- `-e extra_file` - add an extra file or directory to the backup (can be specified multiple times)
+- `-n` - use django build in dump method
+- `--django-dump-options` - options to pass to django dumpdata method
 
 ### Restoring
 
@@ -48,9 +50,10 @@ Tip: If you want to move servers, or copy your production database/media exactly
 
 - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` - Optional, but required for Amazon Glacier upload to work.
 - `PG_DUMP_BIN`, `PG_RESTORE_BIN`, `MYSQLDUMP_BIN`, `MYSQL_BIN` - Optional. Set these to the full paths to the `pg_dump` and `pg_restore`, `mysqldump` and `mysql` binaries. If not set, icybackup will try to find them on the search path. (Note that cron jobs often run with a much smaller search path, so it's a good idea to set these if you're backing up using cron.)
-
+)
 ## To do
 
+- Backup media from non-local storages (e.g. Amazon S3)
 - Backup directory cleanup command
 - Tests
 - remove password from `mysqldump` process name
@@ -67,9 +70,11 @@ The following people contributed code to this project or its ancestors, in chron
 - Jamie Matthews
 - Yar Kravtsov
 - Adam Brenecki, St Barnabas' Theological College
+- Jaroslaw Lachowski
 
 ## License
 
+Copyright &copy; 2014, Jaroslaw Lachowski
 Copyright &copy; 2012, St Barnabas' Theological College  
 Copyright &copy; 2011, Ted Tieken  
 Copyright &copy; 2011, http://code.google.com/p/django-backup/  

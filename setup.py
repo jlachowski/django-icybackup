@@ -9,13 +9,14 @@ def get_long_desc():
     except:
         print "WARNING: The long readme wasn't converted properly"
 
-setup(name='django-icybackup',
+setup(
+    name='django-icybackup-jl',
     version=__version__,
     description='A Django database/media backup tool with Amazon Glacier and local folder support',
     long_description=get_long_desc(),
-    author='Adam Brenecki, St Barnabas\' Theological College',
-    author_email='abrenecki@sbtc.org.au',
-    url='https://github.com/stbarnabas/django-icybackup',
+    author='Jaroslaw Lachowski',
+    author_email='jalachowski@gmail.com',
+    url='https://github.com/jlachowski/django-icybackup',
     packages=find_packages(),
     include_package_data=True,
     setup_requires=[
