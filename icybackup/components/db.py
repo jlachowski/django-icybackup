@@ -1,3 +1,10 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import *
 import os
 from django.core.management.base import CommandError
 from tempfile import mkstemp
@@ -34,12 +41,12 @@ def _database_dict_from_settings(settings):
 
 
 def backup_to(settings, dir, **kwargs):
-    for name, database in _database_dict_from_settings(settings).iteritems():
+    for name, database in _database_dict_from_settings(settings).items():
         do(BACKUP, database, os.path.join(dir, name), **kwargs)
 
 
 def restore_from(settings, dir, **kwargs):
-    for name, database in _database_dict_from_settings(settings).iteritems():
+    for name, database in _database_dict_from_settings(settings).items():
         do(RESTORE, database, os.path.join(dir, name), **kwargs)
 
 
@@ -61,12 +68,12 @@ def do(action, database, f, **kwargs):
 
 
 def django_native_dump(settings, dir, **kwargs):
-    for name, database in _database_dict_from_settings(settings).iteritems():
+    for name, database in _database_dict_from_settings(settings).items():
         _django(BACKUP, dir, name, **kwargs)
 
 
 def django_native_restore(settings, dir, **kwargs):
-    for name, database in _database_dict_from_settings(settings).iteritems():
+    for name, database in _database_dict_from_settings(settings).items():
         _django(RESTORE, dir, name, **kwargs)
 
 

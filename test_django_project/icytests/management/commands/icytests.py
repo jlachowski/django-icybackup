@@ -5,6 +5,12 @@ We're not using Django's unit test framework because this is really only one big
 and Django likes to use an in-memory sqlite database, which can't be backed up.
 """
 from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import *
 import hashlib
 from optparse import make_option
 from django.conf import settings
