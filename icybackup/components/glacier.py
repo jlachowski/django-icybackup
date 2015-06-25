@@ -1,3 +1,4 @@
+from __future__ import print_function
 from .. import models
 from datetime import timedelta, datetime
 from boto.glacier.layer2 import Layer2 as Glacier
@@ -34,7 +35,7 @@ def reconcile(arn, settings):
 		for record in to_be_collected:
 			job = vault.get_job(record.inventory_id)
 			if job.completed:
-				print "Reconciling inventory", record.inventory_id
+				print("Reconciling inventory", record.inventory_id)
 				_do_reconcile(job.get_output())
 				record.collected_date = datetime.now()
 				record.save()
@@ -75,6 +76,6 @@ def _do_delete(vault, day_count, from_date, to_date):
 		qs = models.GlacierBackup.objects.filter(date__lt=end_date, date__gte=begin_date)
 		# delete all but the most recent
 		for record in qs[1:]:
-			print "Deleting", record.glacier_id
+			print("Deleting", record.glacier_id)
 			vault.delete(record.glacier_id)
 			record.delete()

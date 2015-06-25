@@ -1,3 +1,4 @@
+from __future__ import print_function
 from setuptools import setup, find_packages
 import subprocess
 from icybackup import __version__
@@ -7,7 +8,7 @@ def get_long_desc():
     try:
         return subprocess.check_output(['pandoc', '-f', 'markdown', '-t', 'rst', 'README.mdown'])
     except:
-        print "WARNING: The long readme wasn't converted properly"
+        print("WARNING: The long readme wasn't converted properly")
 
 setup(
     name='django-icybackup-jl',

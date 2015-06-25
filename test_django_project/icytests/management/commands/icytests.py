@@ -4,6 +4,7 @@ This runs the tests for icybackup.
 We're not using Django's unit test framework because this is really only one big test,
 and Django likes to use an in-memory sqlite database, which can't be backed up.
 """
+from __future__ import print_function
 import hashlib
 from optparse import make_option
 from django.conf import settings
@@ -35,7 +36,7 @@ class Command(BaseCommand):
 		mysql = true_if_none(options.get('mysql'))
 		sqlite = true_if_none(options.get('sqlite'))
 
-		print postgres, mysql, sqlite
+		print(postgres, mysql, sqlite)
 
 		# Create DB objects
 		if postgres:
