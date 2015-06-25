@@ -32,5 +32,6 @@ setup(
     install_requires=[
         'boto',
         'python-dateutil',
+        'future',
     ],
 )
