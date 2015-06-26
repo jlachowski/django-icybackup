@@ -5,7 +5,6 @@ python:
 install:
   - 'pip install -q -U pip'
   - 'pip install -q django psycopg2 mysql-python'
-  - 'pip install -q future'
   - 'pip install -q -e .'
 before_script:
   - mysql -e 'create database app_test'
@@ -14,4 +13,4 @@ before_script:
   - python manage.py migrate --noinput
   - python manage.py migrate --noinput --database=postgres
   - python manage.py migrate --noinput --database=mysql
-script: python manage.py icytests
+script: python manage.py icytests --noinput
