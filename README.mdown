@@ -1,4 +1,5 @@
 # django-icybackup
+[![Build Status](https://travis-ci.org/jlachowski/django-icybackup.svg?branch=master)](https://travis-ci.org/jlachowski/django-icybackup)
 
 Back up your databases and media directory to a local file/directory or Amazon Glacier. Works with PostgreSQL, MySQL and sqlite.
 
