@@ -4,8 +4,8 @@ python:
   - '3.4'
 install:
   - 'pip install -q -U pip'
-  - 'pip install -q django psycopg2 mysql-python'
-  - 'pip install -q -e .'
+  - 'pip install django psycopg2 mysqlclient'
+  - 'pip install -e .'
 before_script:
   - mysql -e 'create database app_test'
   - psql -c 'create database app_test' -U postgres
@@ -13,4 +13,4 @@ before_script:
   - python manage.py migrate --noinput
   - python manage.py migrate --noinput --database=postgres
   - python manage.py migrate --noinput --database=mysql
-script: python manage.py icytests --noinput
+script: python manage.py icytests
