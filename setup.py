@@ -23,6 +23,6 @@ setup(
     url='https://github.com/jlachowski/django-icybackup',
     packages=find_packages(),
     include_package_data=True,
-    setup_requires=['setuptools_git>=0.3', ],
+    setup_requires=['setuptools_git>=0.3', 'future'],
     install_requires=dependencies,
 )
