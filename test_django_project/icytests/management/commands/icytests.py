@@ -46,17 +46,17 @@ class Command(BaseCommand):
 
 		# Create DB objects
 		if postgres:
-			call_command('migrate --noinput', input=False, database='postgres')
+			calltest fix_command('migrate', '--noinput', input=False, database='postgres')
 			Blah.objects.using('postgres').all().delete()
 			pg_test = Blah.objects.create(text=TEST_POSTGRES)
 			pg_test.save(using='postgres')
 		if mysql:
-			call_command('migrate --noinput', input=False, database='mysql')
+			call_command('migrate', '--noinput', input=False, database='mysql')
 			Blah.objects.using('mysql').all().delete()
 			mysql_test = Blah.objects.create(text=TEST_MYSQL)
 			mysql_test.save(using='mysql')
 		if sqlite:
-			call_command('migrate --noinput', input=False)
+			call_command('migrate', '--noinput', input=False)
 			Blah.objects.using('default').all().delete()
 			sqlite_test = Blah.objects.create(text=TEST_SQLITE)
 			sqlite_test.save()
