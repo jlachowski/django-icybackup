@@ -56,7 +56,7 @@ class Command(BaseCommand):
 			mysql_test = Blah.objects.create(text=TEST_MYSQL)
 			mysql_test.save(using='mysql')
 		if sqlite:
-			call_command('migrate', --noinput', input=False)
+			call_command('migrate', '--noinput', input=False)
 			Blah.objects.using('default').all().delete()
 			sqlite_test = Blah.objects.create(text=TEST_SQLITE)
 			sqlite_test.save()
