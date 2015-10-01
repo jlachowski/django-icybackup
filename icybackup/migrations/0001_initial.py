@@ -1,41 +1,34 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-from future import standard_library
-standard_library.install_aliases()
-from builtins import *
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'GlacierBackup'
-        db.create_table('icybackup_glacierbackup', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('glacier_id', self.gf('django.db.models.fields.CharField')(unique=True, max_length=138)),
-            ('date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal('icybackup', ['GlacierBackup'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'GlacierBackup'
-        db.delete_table('icybackup_glacierbackup')
-
-
-    models = {
-        'icybackup.glacierbackup': {
-            'Meta': {'object_name': 'GlacierBackup'},
-            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'glacier_id': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '138'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        }
-    }
-
-    complete_apps = ['icybackup']
+    operations = [
+        migrations.CreateModel(
+            name='GlacierBackup',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('glacier_id', models.CharField(unique=True, max_length=138, verbose_name='Glacier backup ID')),
+                ('date', models.DateTimeField()),
+            ],
+            options={
+                'verbose_name': 'Glacier backup',
+                'verbose_name_plural': 'Glacier backups',
+            },
+        ),
+        migrations.CreateModel(
+            name='GlacierInventory',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('inventory_id', models.CharField(unique=True, max_length=92, verbose_name='Glacier inventory ID')),
+                ('collected_date', models.DateTimeField(default=None, null=True, blank=True)),
+                ('requested_date', models.DateTimeField(auto_now_add=True)),
+            ],
+        ),
+    ]
