@@ -16,6 +16,10 @@ from django.core.management.base import BaseCommand, CommandError
 from distutils.dir_util import copy_tree
 
 from ...components import db
+# temporary fix for unicode characters in file names
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Based on: http://code.google.com/p/django-backup/
 # Based on: http://www.djangosnippets.org/snippets/823/
