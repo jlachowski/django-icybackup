@@ -6,7 +6,6 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import *
 import os
-import sys
 import time
 import shutil
 from optparse import make_option
@@ -16,6 +15,10 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from ...components import db, glacier
+# temporary fix for unicode characters in file names
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Based on: http://code.google.com/p/django-backup/
 # Based on: http://www.djangosnippets.org/snippets/823/
