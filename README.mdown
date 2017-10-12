@@ -19,6 +19,10 @@ A fork of (a fork of) django-backup which adds:
 
 Run `pip install django-icybackup-jl`, then add `icybackup` to your `INSTALLED_APPS`.
 
+### Django compatibility
+- For Django < 1.8, use `django-icybackup-jl` version of 0.1.6 (or lower)
+- For Django >= 1.8, use `django-icybackup-jl` version 0.1.8 (or higher)
+
 ## Usage
 
 ### Backing up
@@ -72,6 +76,7 @@ The following people contributed code to this project or its ancestors, in chron
 - Yar Kravtsov
 - Adam Brenecki, St Barnabas' Theological College
 - Jaroslaw Lachowski
+- Adrian Bohdanowicz
 
 ## License
 
