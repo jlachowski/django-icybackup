@@ -27,21 +27,38 @@ sys.setdefaultencoding('utf-8')
 
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option(
-            '-i', '--file', default=None, dest='input',
-            help='Read backup from file'),
-        make_option(
-            '--pg-restore-flags', default=None, dest='postgres_flags',
-            help='Flags to pass to pg_restore'),
-        make_option(
-            '-I', '--stdin', action='store_true', dest='stdin',
-            help='Read backup from standard input'),
-        make_option(
-            '-n', '--native-django-restore', action='store_true', default=None,
-            dest='nativerestore', help='use django build in load data method'),
-        )
+
     help = "Restore a Django installation (database and media directory)."
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '-i',
+            '--file',
+            default=None,
+            dest='input',
+            help='Read backup from file'
+        )
+        parser.add_argument(
+            '--pg-restore-flags',
+            default=None,
+            dest='postgres_flags',
+            help='Flags to pass to pg_restore'
+        )
+        parser.add_argument(
+            '-I',
+            '--stdin',
+            dest='stdin',
+            action='store_true',
+            help='Read backup from standard input'
+        )
+        parser.add_argument(
+            '-n',
+            '--native-django-restore',
+            default=None,
+            dest='nativerestore',
+            action='store_true',
+            help='Use django build in load data method'
+        )
 
     def handle(self, *args, **options):
         input_file = options.get('input')
