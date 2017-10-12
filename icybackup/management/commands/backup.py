@@ -26,28 +26,54 @@ sys.setdefaultencoding('utf-8')
 
 
 class Command(BaseCommand):
-    option_list = BaseCommand.option_list + (
-        make_option(
-            '-o', '--output', default=None, dest='output',
-            help='Write backup to file'),
-        make_option(
-            '-d', '--outdir', default=None, dest='outdir',
-            help='Write backup to timestamped file in a directory'),
-        make_option(
-            '-g', '--glacier', default=None, dest='glacier',
-            help='Upload backup to the Amazon Glacier vault with the given ARN'),
-        make_option(
-            '-O', '--stdout', action='store_true', dest='stdout',
-            help='Output backup tarball to standard output'),
-        make_option(
-            '--extra', '-e', action='append', default=[], dest='extras',
-            help='Include extra directories or files in the backup tarball'),
-        make_option(
-            '-n', '--native-django-dump', action='store_true', default=None,
-            dest='nativedump', help='use django build in database dump method'),
-    )
 
     help = "Back up a Django installation (database and media directory)."
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '-o',
+            '--output',
+            default=None,
+            dest='output',
+            help='Write backup to file'
+        )
+        parser.add_argument(
+            '-d',
+            '--outdir',
+            default=None,
+            dest='outdir',
+            help='Write backup to timestamped file in a directory'
+        )
+        parser.add_argument(
+            '-g',
+            '--glacier',
+            default=None,
+            dest='glacier',
+            help='Upload backup to the Amazon Glacier vault with the given ARN'
+        )
+        parser.add_argument(
+            '-O',
+            '--stdout',
+            dest='stdout',
+            action='store_true',
+            help='Output backup tarball to standard output'
+        )
+        parser.add_argument(
+            '-e',
+            '--extra',
+            default=[],
+            dest='extras',
+            action='append',
+            help='Include extra directories or files in the backup tarball'
+        )
+        parser.add_argument(
+            '-n',
+            '--native-django-dump',
+            default=None,
+            dest='nativedump',
+            action='store_true',
+            help='Use django build in database dump method'
+        )
 
     def handle(self, *args, **options):
         extras = options.get('extras')
